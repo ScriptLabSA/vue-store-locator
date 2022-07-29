@@ -1,0 +1,91 @@
+.vsl-store-item{
+    display: flex;
+    align-items: center;
+    padding: 4px 0;
+    border-top: 2px solid #f2f2f2;
+}
+.vsl-store-item:last-child{
+    border-bottom: 2px solid #f2f2f2;
+}
+.vsl-store-logo{
+    width: 60px;
+}
+.vsl-store-logo img{
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+}
+.sl-store-data{
+    padding: 5px 10px;
+    border-right: 2px solid #f2f2f2;
+}
+.vsl-store-name h3{
+    margin-bottom: 0;
+}
+.sl-store-actions{
+    display: flex;
+    align-items: center;
+    margin-left: auto
+}
+.location {
+    width: 38px;
+    height: 38px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f2f2f2;
+    text-align: center;
+    margin-right: 4px;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+.location svg{
+ width: 14px;
+ height: auto;
+ vertical-align: middle;
+ fill: #000000;
+}
+.open-store{
+    display: flex;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 4px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.open-store svg{
+    width: 12px;
+    height: auto;
+    vertical-align: middle;
+    fill: #f2f2f2;
+}
+.open-store-text{
+    padding: 0 8px;
+}
+.open-store-icon{
+    width: 30px;
+    height: 30px;
+    background-color: #000000;
+    color: #f2f2f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius:50px;
+    -moz-border-radius:50px;
+    -ms-border-radius:50px;
+    -o-border-radius:50px;
+    -webkit-border-radius:50px;
+}
+/* App Filters */
+.app-filters{
+    padding: 10px 0;
+}

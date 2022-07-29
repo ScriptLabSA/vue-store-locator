@@ -50,7 +50,6 @@ class VslPostType{
         wp_nonce_field(basename(__FILE__), 'vsl_meta_box');
         foreach($this->fields as $field){
             $field->setValue(get_post_meta( $post->ID, $field->getName(), true ));
-            error_log(print_r($field, true));
             echo $field->getHtmlField();
         }
     }

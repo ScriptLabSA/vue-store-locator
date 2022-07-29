@@ -19,6 +19,36 @@ class VslConstants{
             'label' => 'Phone',
             'value' => '',
             'type' => 'tel'
+        ),
+        array(
+            'name' => 'store_street_address',
+            'label' => 'Street Address',
+            'value' => '',
+            'type' => 'text'
+        ),
+        array(
+            'name' => 'store_suburb',
+            'label' => 'Suburb',
+            'value' => '',
+            'type' => 'text'
+        ),
+        array(
+            'name' => 'store_city',
+            'label' => 'City',
+            'value' => '',
+            'type' => 'text'
+        ),
+        array(
+            'name' => 'store_province',
+            'label' => 'Province',
+            'value' => '',
+            'type' => 'text'
+        ),
+        array(
+            'name' => 'store_country',
+            'label' => 'Country',
+            'value' => '',
+            'type' => 'text'
         )
     );
 }
