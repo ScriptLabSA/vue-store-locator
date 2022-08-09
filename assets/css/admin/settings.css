@@ -1,0 +1,109 @@
+.custom-fields-container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.custom-fields-container,
+.custom-fields-container .card {
+    max-width: 100%;
+} 
+
+.custom-fields-container .card {
+    box-shadow: 0 0 13px 0 rgba(82,63,105,.05);
+    background-color: #fafafa;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    padding: 20px;
+}
+
+.custom-fields-main .add-more-custom {
+    text-align: right;
+}
+
+.custom-fields-main .add-item {
+    color: #fff;
+    background-color: #56CC9D;
+    border-color: #56CC9D;
+}
+
+.custom-fields-main .add-item:hover,
+.custom-fields-main .add-item:active,
+.custom-fields-main .add-item:focus {
+    color: #fff;
+    background-color: #3ac18c;
+    border-color: #37b885;
+}
+
+.custom-fields-main .remove-container {
+    margin-top: 10px;
+}
+
+.custom-fields-main .remove-item {
+    color: #fff;
+    background-color: #FF7851;
+    border-color: #FF7851;
+}
+
+.custom-fields-main .remove-item:hover,
+.custom-fields-main .remove-item:active,
+.custom-fields-main .remove-item:focus {
+    color: #fff;
+    background-color: #ff5a2b;
+    border-color: #ff501e;
+}
+
+.vsl-settings .form-control {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.vsl-settings .form-label {
+    display: inline-block;
+    margin-bottom: .5rem;
+}
+
+.vsl-settings .form-select {
+    display: block;
+    width: 100%;
+    padding: .375rem 2.25rem .375rem .75rem;
+    -moz-padding-start: calc(0.75rem - 3px);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right .75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.vsl-settings .mb-space {
+    margin-bottom: 10px;
+}
+
+.vsl-settings .text-muted {
+    color: #6c757d;
+    display: block;
+    margin-top: .25rem;
+}
