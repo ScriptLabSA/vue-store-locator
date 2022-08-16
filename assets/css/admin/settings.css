@@ -17,6 +17,31 @@
     padding: 20px;
 }
 
+.custom-fields-container .field-dragged {
+    position: absolute;
+    z-index: 99999999;
+}
+
+.custom-fields-container .grid-card-move {
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 25px;
+    justify-content: center;
+    cursor: pointer;
+    background: #ecececb5;
+    color: #3c434a;
+    border-radius: 4px 0 0 4px;
+    align-items: center;
+}
+
+.custom-fields-container .container-item .row {
+    padding-left: 20px;
+}
+
 .custom-fields-main .add-more-custom {
     text-align: right;
 }
@@ -107,3 +132,4 @@
     display: block;
     margin-top: .25rem;
 }
+

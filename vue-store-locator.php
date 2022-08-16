@@ -35,15 +35,19 @@ defined( 'ABSPATH' ) || exit();
 if ( ! defined( 'VSL_PLUGIN_FILE' ) ) {
     define( 'VSL_PLUGIN_FILE', __FILE__ );
 }
+
 if ( ! defined( 'VSL_PLUGIN_BASENAME' ) ) {
     define( 'VSL_PLUGIN_BASENAME', plugin_basename( VSL_PLUGIN_FILE ) );
 }
+
 if ( ! defined( 'VSL_PLUGIN_NAME' ) ) {
     define( 'VSL_PLUGIN_NAME', trim( dirname( VSL_PLUGIN_BASENAME ), '/' ) );
 }
+
 if ( ! defined('VSL_PLUGIN_DIR' ) ) {
     define( 'VSL_PLUGIN_DIR', dirname( VSL_PLUGIN_FILE ) );
 }
+
 if ( ! defined( 'VSL_PLUGIN_URI' ) ) {
     define( 'VSL_PLUGIN_URL', plugin_dir_url( VSL_PLUGIN_FILE ) );
 }

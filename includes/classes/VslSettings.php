@@ -119,10 +119,13 @@ class VslSettings
 	 * @return void
 	 */
 	public function settings_assets() {
+		wp_register_script( $this->token . '-sortable-js', VSL_PLUGIN_URL . '/assets/js/jquery-sortable-min.js', array( 'jquery' ), '0.9.13', true );
+		wp_enqueue_script( $this->token . '-sortable-js' );
+
 		wp_register_script( $this->token . '-clonedata-js', VSL_PLUGIN_URL . '/assets/js/cloneData.js', array( 'jquery' ), '1.0.1', true );
 		wp_enqueue_script( $this->token . '-clonedata-js' );
 
-		wp_register_script( $this->token . '-settings-js', VSL_PLUGIN_URL . '/assets/js/settings.js', array( 'jquery', $this->token . '-clonedata-js' ), '1.0.1', true );
+		wp_register_script( $this->token . '-settings-js', VSL_PLUGIN_URL . '/assets/js/settings.js', array( 'jquery', $this->token . '-clonedata-js', $this->token . '-sortable-js' ), '1.0.5', true );
 		wp_enqueue_script( $this->token . '-settings-js' );
 		wp_localize_script( $this->token . '-settings-js', 'vsl_settings_vars', array(
 			'removeConfirmMessage' => __( 'Are you sure want to delete?', VSL_PLUGIN_NAME ),
@@ -130,7 +133,7 @@ class VslSettings
 			'helpMessage' => __( 'Add Comma-separated text values for select options', VSL_PLUGIN_NAME )
 		));
 
-		wp_register_style( $this->token . '-settings-css', VSL_PLUGIN_URL . '/assets/css/admin/settings.css', array(), '1.0.1' );
+		wp_register_style( $this->token . '-settings-css', VSL_PLUGIN_URL . '/assets/css/admin/settings.css', array(), '1.0.4' );
         wp_enqueue_style( $this->token . '-settings-css' );
 
 		wp_enqueue_style( 'bootstrap_grid', VSL_PLUGIN_URL . '/assets/css/bootstrap-grid.min.css', array(), null );
@@ -626,7 +629,9 @@ class VslSettings
 					$iterator = 0;
 					foreach( $data as $custom_field ) {
 						$html .= '<div class="card container-item" data-index="' . $iterator . '" data-name="' . esc_attr( $option_name ) . '">';
+						$html .=    '<i class="grid-card-move dashicons dashicons-move"></i>';
 						$html .=    '<div class="row g-2">';
+						// $html .=       '<span class="close">&times;</span>';
 						$html .=       '<div class="col-4 mb-space"><label class="form-label" for="' . esc_attr( $option_name ) . '_name_' . $iterator . '">' . __( 'Name', VSL_PLUGIN_NAME ) . '</label><input class="form-control" type="text" id="' . esc_attr( $option_name ) . '_name_' . $iterator . '" name="' . esc_attr( $option_name ) . '[' . $iterator . '][name]" value="' . esc_attr( $custom_field['name'] ) . '" required="required"></div>';
 						$html .=       '<div class="col-4 mb-space"><label class="form-label" for="' . esc_attr( $option_name ) . '_label_' . $iterator . '">' . __( 'Label', VSL_PLUGIN_NAME ) . '</label><input class="form-control" type="text" id="' . esc_attr( $option_name ) . '_label_' . $iterator . '" name="' . esc_attr( $option_name ) . '[' . $iterator . '][label]" value="' . esc_attr( $custom_field['label'] ) . '" required="required"></div>';
 						$html .=       '<div class="col-4 mb-space"><label class="form-label" for="' . esc_attr( $option_name ) . '_type_' . $iterator . '">' . __( 'Type', VSL_PLUGIN_NAME ) . '</label>' . $this->get_select_html( $option_name, $custom_field['type'], $iterator ) . '</div>';

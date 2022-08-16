@@ -40,5 +40,63 @@ jQuery( document ).ready(
 					break;
 			} 
 		} );
+
+		$( ".custom-fields-container" ).sortable( {
+			containerSelector: '.custom-fields-container',
+			itemSelector: '.container-item',
+			placeholder: '<div class="card container-item placeholder"></div>',
+			draggedClass: 'field-dragged',
+			handle: 'i.grid-card-move',
+			onDrop: function( $item, container, _super ) {
+				updateMetaIndex();
+				_super( $item, container );
+			},
+            serialize: function ( parent, children, isContainer ) {
+                return isContainer ? [children] : parent.data( 'index' );
+            }
+		});
+		  
+		updateMetaIndex = function () {
+			var indexValue = 0;
+			$( '.custom-fields-container .container-item' ).each( function() {
+				var $containerItem = $( this );
+				$containerItem.find( 'input, select, textarea' ).each( function() {
+					var $elem = $( this );
+
+					var name = $elem.attr( 'name' );
+					if ( name !== undefined ) {
+						var matches = name.match(/(^.+?)([\[\d{1,}\]]{1,})(\[.+\]$)/i);
+		
+						if ( matches && matches.length === 4 ) {
+							matches[2] = matches[2].replace( /\]\[/g, "-" ).replace (/\]|\[/g, '' );
+							var identifiers = matches[2].split('-');
+							identifiers[0] = indexValue;
+		
+							name = matches[1] + '[' + identifiers.join('][') + ']' + matches[3];
+							$elem.attr( 'name', name );
+						}
+					}
+
+					var id = $elem.attr( 'id' );
+					var newID = id;
+
+					if ( id !== undefined ) {
+						newID = incrementMetaIndex( id, indexValue );
+						$elem.attr( 'id', newID );
+						$elem.parent().find('label').attr( 'for', newID );
+					}
+				} );
+
+				$containerItem.attr( 'data-index', indexValue );
+
+				indexValue++;
+            });
+		}
+
+		var incrementMetaIndex = function ( string, index ) {
+            return string.replace( /[0-9]+(?!.*[0-9])/, function( match ) {
+                return index;
+            } );
+        }
 	}
 );
