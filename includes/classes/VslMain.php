@@ -60,6 +60,6 @@ final class VslMain {
         }
 
         wp_enqueue_style( 'bootstrap_grid', VSL_PLUGIN_URL . '/assets/css/bootstrap-grid.min.css', array(), null );
-        wp_enqueue_style( 'vsl_admin_styles', VSL_PLUGIN_URL . '/assets/css/admin/admin.css', array(), null );
+        wp_enqueue_style( 'vsl_admin_styles', VSL_PLUGIN_URL . '/assets/css/admin/admin.css', array(), '1.0.1' );
     }
 }

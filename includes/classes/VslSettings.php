@@ -125,15 +125,16 @@ class VslSettings
 		wp_register_script( $this->token . '-clonedata-js', VSL_PLUGIN_URL . '/assets/js/cloneData.js', array( 'jquery' ), '1.0.1', true );
 		wp_enqueue_script( $this->token . '-clonedata-js' );
 
-		wp_register_script( $this->token . '-settings-js', VSL_PLUGIN_URL . '/assets/js/settings.js', array( 'jquery', $this->token . '-clonedata-js', $this->token . '-sortable-js' ), '1.0.5', true );
+		wp_register_script( $this->token . '-settings-js', VSL_PLUGIN_URL . '/assets/js/settings.js', array( 'jquery', $this->token . '-clonedata-js', $this->token . '-sortable-js' ), '1.0.8', true );
 		wp_enqueue_script( $this->token . '-settings-js' );
 		wp_localize_script( $this->token . '-settings-js', 'vsl_settings_vars', array(
 			'removeConfirmMessage' => __( 'Are you sure want to delete?', VSL_PLUGIN_NAME ),
 			'labelMessage' => __( 'Options', VSL_PLUGIN_NAME ),
-			'helpMessage' => __( 'Add Comma-separated text values for select options', VSL_PLUGIN_NAME )
+			'helpMessage' => __( 'Add Comma-separated text values for select options', VSL_PLUGIN_NAME ),
+			'labelMultiple' => __( 'Multiple', VSL_PLUGIN_NAME )
 		));
 
-		wp_register_style( $this->token . '-settings-css', VSL_PLUGIN_URL . '/assets/css/admin/settings.css', array(), '1.0.4' );
+		wp_register_style( $this->token . '-settings-css', VSL_PLUGIN_URL . '/assets/css/admin/settings.css', array(), '1.0.5' );
         wp_enqueue_style( $this->token . '-settings-css' );
 
 		wp_enqueue_style( 'bootstrap_grid', VSL_PLUGIN_URL . '/assets/css/bootstrap-grid.min.css', array(), null );
@@ -634,14 +635,19 @@ class VslSettings
 						// $html .=       '<span class="close">&times;</span>';
 						$html .=       '<div class="col-4 mb-space"><label class="form-label" for="' . esc_attr( $option_name ) . '_name_' . $iterator . '">' . __( 'Name', VSL_PLUGIN_NAME ) . '</label><input class="form-control" type="text" id="' . esc_attr( $option_name ) . '_name_' . $iterator . '" name="' . esc_attr( $option_name ) . '[' . $iterator . '][name]" value="' . esc_attr( $custom_field['name'] ) . '" required="required"></div>';
 						$html .=       '<div class="col-4 mb-space"><label class="form-label" for="' . esc_attr( $option_name ) . '_label_' . $iterator . '">' . __( 'Label', VSL_PLUGIN_NAME ) . '</label><input class="form-control" type="text" id="' . esc_attr( $option_name ) . '_label_' . $iterator . '" name="' . esc_attr( $option_name ) . '[' . $iterator . '][label]" value="' . esc_attr( $custom_field['label'] ) . '" required="required"></div>';
-						$html .=       '<div class="col-4 mb-space"><label class="form-label" for="' . esc_attr( $option_name ) . '_type_' . $iterator . '">' . __( 'Type', VSL_PLUGIN_NAME ) . '</label>' . $this->get_select_html( $option_name, $custom_field['type'], $iterator ) . '</div>';
+						$html .=       '<div class="col-4 mb-space"><label class="form-label" for="' . esc_attr( $option_name ) . '_type_' . $iterator . '">' . __( 'Type', VSL_PLUGIN_NAME ) . '</label>' . $this->get_select_html( $option_name, $custom_field['type'], $iterator ) . '</div>';						
 						
 						switch ( $custom_field['type'] ) {
 							case 'select':
-								$html .= '<div class="col-12 mb-space exclude"><label class="form-label" for="' . esc_attr( $option_name ) . '_options_' . $iterator . '">' . __( 'Options', VSL_PLUGIN_NAME ) . '</label><textarea class="form-control" type="text" id="' . esc_attr( $option_name ) . '_options_' . $iterator . '" name="' . esc_attr( $option_name ) . '[' . $iterator . '][options]" required="required">' . esc_textarea( $custom_field['options'] ) . '</textarea><small class="text-muted">' . __( 'Add Comma-separated text values for select options', VSL_PLUGIN_NAME ) . '</small></div>';
+								$html .= '<div class="col-12 mb-space exclude"><label class="form-label" for="' . esc_attr( $option_name ) . '_options_' . $iterator . '">' . __( 'Options', VSL_PLUGIN_NAME ) . '</label><textarea class="form-control" id="' . esc_attr( $option_name ) . '_options_' . $iterator . '" name="' . esc_attr( $option_name ) . '[' . $iterator . '][options]" required="required">' . esc_textarea( $custom_field['options'] ) . '</textarea><small class="text-muted">' . __( 'Add Comma-separated text values for select options', VSL_PLUGIN_NAME ) . '</small></div>';
+								$html .= '<div class="col-12 mb-space exclude"><input class="form-check-input" type="checkbox" id="' . esc_attr( $option_name ) . '_multiple_' . $iterator . '" name="' . esc_attr( $option_name ) . '[' . $iterator . '][multiple]" ' . checked( '1', $custom_field['multiple'], false ) . ' value="1" /><label class="form-check-label" for="' . esc_attr( $option_name ) . '_multiple_' . $iterator . '">' . __( 'Multiple', VSL_PLUGIN_NAME ) . '</label></div>';
+								break;
+							case 'country':
+								$html .= '<div class="col-12 mb-space exclude"><input class="form-check-input" type="checkbox" id="' . esc_attr( $option_name ) . '_multiple_' . $iterator . '" name="' . esc_attr( $option_name ) . '[' . $iterator . '][multiple]" ' . checked( '1', $custom_field['multiple'], false ) . ' value="1" /><label class="form-check-label" for="' . esc_attr( $option_name ) . '_multiple_' . $iterator . '">' . __( 'Multiple', VSL_PLUGIN_NAME ) . '</label></div>';
 								break;
 						}
-						
+
+						$html .=       '<div class="col-12 mb-space"><label class="form-label" for="' . esc_attr( $option_name ) . '_desc_' . $iterator . '">' . __( 'Description', VSL_PLUGIN_NAME ) . '</label><textarea class="form-control" type="text" id="' . esc_attr( $option_name ) . '_desc_' . $iterator . '" name="' . esc_attr( $option_name ) . '[' . $iterator . '][desc]" required="required">' . esc_textarea( $custom_field['desc'] ) . '</textarea></div>';
 						$html .=       '<div class="col-12 remove-container">';
 						$html .=          '<a href="javascript:;" class="remove-item button">' . __( 'Remove', VSL_PLUGIN_NAME ) . '</a>';
 						$html .=       '</div>';
@@ -762,6 +768,10 @@ class VslSettings
 		for( $i = 0; $i < count( $settings ); $i++ ) {
 			if( isset( $settings[$i]['type'] ) && 'select' === $settings[$i]['type'] && isset( $settings[$i]['options'] ) && ! empty( $settings[$i]['options'] ) ) {
 				$settings[$i]['options'] = array_map( 'trim', str_getcsv( $settings[$i]['options'] ) );
+			}
+
+			if( isset( $settings[$i]['type'] ) && 'country' === $settings[$i]['type'] ) {
+				$settings[$i]['options'] = VslConstants::COUNTRY_LIST;
 			}
 		}
 

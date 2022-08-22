@@ -14,14 +14,20 @@ jQuery( document ).ready(
         	var selected = $target.val();
 			switch( selected ) {
 				case 'select':
+					$( event.target ).closest( ".row" ).find( ".exclude" ).slideUp( function() {
+						$( this ).remove();
+					} );
+
 					$( '<div>', {
 						class: "col-12 mb-space exclude",
 						html: [
 							$( '<label>', {
 								class: 'form-label',
+								for: $( event.target ).closest( ".container-item" ).attr( "data-name" ) + '_options_' + $( event.target ).closest( ".container-item" ).attr( "data-index" ),
 								html: vsl_settings_vars.labelMessage
 							} ), 
 							$( '<textarea>', {
+								id: $( event.target ).closest( ".container-item" ).attr( "data-name" ) + '_options_' + $( event.target ).closest( ".container-item" ).attr( "data-index" ),
 								name: $( event.target ).closest( ".container-item" ).attr( "data-name" ) + '[' + $( event.target ).closest( ".container-item" ).attr( "data-index" ) + '][options]',
 								class: 'form-control',
 								required: 'required'
@@ -29,6 +35,47 @@ jQuery( document ).ready(
 							$( '<small>', {
 								html: vsl_settings_vars.helpMessage,
 								class: 'text-muted'
+							} )
+						]
+					} ).add(
+						$( '<div>', {
+							class: "col-12 mb-space form-check exclude",
+							html: [
+								$( '<input>', {
+									type: 'checkbox',
+									value: '1',
+									id: $( event.target ).closest( ".container-item" ).attr( "data-name" ) + '_multiple_' + $( event.target ).closest( ".container-item" ).attr( "data-index" ),
+									name: $( event.target ).closest( ".container-item" ).attr( "data-name" ) + '[' + $( event.target ).closest( ".container-item" ).attr( "data-index" ) + '][multiple]',
+									class: 'form-check-input',
+									required: 'required'
+								} ),
+								$( '<label>', {
+									for: $( event.target ).closest( ".container-item" ).attr( "data-name" ) + '_multiple_' + $( event.target ).closest( ".container-item" ).attr( "data-index" ),
+									class: 'form-check-label',
+									html: vsl_settings_vars.labelMultiple
+								} )
+							]
+						} )
+					).insertAfter( $( event.target ).closest( ".col-4" ) );
+					break;
+				case 'country':
+					$( event.target ).closest( ".row" ).find( ".exclude" ).slideUp( function() {
+						$( this ).remove();
+					} );
+					$( '<div>', {
+						class: "col-12 mb-space form-check exclude",
+						html: [
+							$( '<input>', {
+								type: 'checkbox',
+								value: '1',
+								id: $( event.target ).closest( ".container-item" ).attr( "data-name" ) + '_multiple_' + $( event.target ).closest( ".container-item" ).attr( "data-index" ),
+								name: $( event.target ).closest( ".container-item" ).attr( "data-name" ) + '[' + $( event.target ).closest( ".container-item" ).attr( "data-index" ) + '][multiple]',
+								class: 'form-check-input'
+							} ),
+							$( '<label>', {
+								for: $( event.target ).closest( ".container-item" ).attr( "data-name" ) + '_multiple_' + $( event.target ).closest( ".container-item" ).attr( "data-index" ),
+								class: 'form-check-label',
+								html: vsl_settings_vars.labelMultiple
 							} )
 						]
 					} ).insertAfter( $( event.target ).closest( ".col-4" ) );
@@ -41,6 +88,7 @@ jQuery( document ).ready(
 			} 
 		} );
 
+		var adjustment;
 		$( ".custom-fields-container" ).sortable( {
 			containerSelector: '.custom-fields-container',
 			itemSelector: '.container-item',
@@ -65,11 +113,11 @@ jQuery( document ).ready(
 
 					var name = $elem.attr( 'name' );
 					if ( name !== undefined ) {
-						var matches = name.match(/(^.+?)([\[\d{1,}\]]{1,})(\[.+\]$)/i);
+						var matches = name.match( /(^.+?)([\[\d{1,}\]]{1,})(\[.+\]$)/i );
 		
 						if ( matches && matches.length === 4 ) {
 							matches[2] = matches[2].replace( /\]\[/g, "-" ).replace (/\]|\[/g, '' );
-							var identifiers = matches[2].split('-');
+							var identifiers = matches[2].split( '-' );
 							identifiers[0] = indexValue;
 		
 							name = matches[1] + '[' + identifiers.join('][') + ']' + matches[3];
@@ -83,7 +131,7 @@ jQuery( document ).ready(
 					if ( id !== undefined ) {
 						newID = incrementMetaIndex( id, indexValue );
 						$elem.attr( 'id', newID );
-						$elem.parent().find('label').attr( 'for', newID );
+						$elem.parent().find( 'label' ).attr( 'for', newID );
 					}
 				} );
 

@@ -11,7 +11,9 @@ class VslFieldFactroy {
     private $label;
     private $value;
     private $type;
+    private $desc;
     private $options;
+    private $multiple;
 
     public function __construct( Array $field ) {
         // Init Field Values
@@ -31,6 +33,10 @@ class VslFieldFactroy {
        ? $field['label'] 
        : new WP_Error( 'required_value', __( "Field label is required to create a new field object", "vue-store-locator" ) );
        
+       // Field Desc
+       $this->desc = isset( $field['desc'] ) && ! empty( $field['desc'] ) ? $field['desc'] : '';
+       $this->multiple = isset( $field['multiple'] ) &&  $field['multiple'] == '1' ? true : false;
+       
        $this->id = isset( $field['id'] ) && ! empty( $field['id'] ) ? $field['id'] : $field['name'];
        $this->css = isset( $field['css'] ) && ! empty( $field['css'] ) ? $field['css'] : $field['name'];
        $this->value = isset( $field['value'] ) && ! empty( $field['value'] ) ? $field['value'] : '';
@@ -38,7 +44,7 @@ class VslFieldFactroy {
     }
 
     private function getAllowedTypes() {
-        return array( 'text', 'url', 'textarea', 'tel', 'number', 'email', 'select' );
+        return array( 'text', 'url', 'textarea', 'tel', 'number', 'email', 'select', 'country' );
     }
 
     private function getInputTypes() {
@@ -52,6 +58,7 @@ class VslFieldFactroy {
                 include VSL_PLUGIN_DIR . '/templates/fields/input.php';
                 break;
             case "select":
+            case "country":
                 include VSL_PLUGIN_DIR . '/templates/fields/select.php';
                 break;
             case "textarea":
@@ -80,6 +87,10 @@ class VslFieldFactroy {
         return $this->label;
     }
 
+    public function getDesc() {
+        return $this->desc;
+    }
+
     public function getId() {
         return $this->id;
     }
@@ -94,5 +105,9 @@ class VslFieldFactroy {
 
     public function getOptions() {
         return $this->options;
+    }
+
+    public function isMultiple() {
+        return $this->multiple;
     }
 }

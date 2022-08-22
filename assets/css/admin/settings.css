@@ -17,9 +17,17 @@
     padding: 20px;
 }
 
+body.dragging, body.dragging * {
+    cursor: move !important;
+  }
+
 .custom-fields-container .field-dragged {
     position: absolute;
     z-index: 99999999;
+}
+
+.custom-fields-container .container-item.placeholder {
+    border: 2px dashed #c3c4c7;
 }
 
 .custom-fields-container .grid-card-move {
@@ -132,4 +140,3 @@
     display: block;
     margin-top: .25rem;
 }
-
